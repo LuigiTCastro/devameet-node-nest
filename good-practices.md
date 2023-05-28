@@ -20,3 +20,13 @@ Default way of naming files:
 <!-- design pattern specification: which is the responsibility of that file -->
 
 
+
+# SERVICE
+Its where all business rule are.
+
+# CONTROLLER
+Its where all http routes are. (in adittion invoke the Service)
+
+# MODULE
+Invokes the Service and Controller.
+
