@@ -48,12 +48,6 @@ No projeto Nest.js, a importação dos [controllers] e [services] é realizada n
 Nele encontra-se a classe  ``AppModule``, que é decorada com o decorator ``@Module``. Nessa classe que são feitas as importações dos controllers e serviços.
 Isso garante que eles estão habilitados e disponíveis para uso na aplicação Nest.js.
 
-__Decorators__
-Way to inject behavior into the class, with economy of code.
-__@Module__
-File grouping as a microservice.
-Piece of code that works autonomously. <!-- can be imported to be used in anothe code -->
-
 > [APP.SERVICE.TS]
 Imports the INJECTABLE decorator for his class to be injectable in any other class.
 <!-- Dependency Injection -->
@@ -67,3 +61,20 @@ Creates the BOOTSTRAP function (initialize)
 __Bootstrap function__
 Creates the NEST project from the AppModule..
 And goes up on the 3000 door.
+
+
+# DECORATORS
+Way to inject behavior into the class, with economy of code.
+
+__@Module__ : module
+File grouping as a microservice.
+Piece of code that works autonomously. <!-- can be imported to be used in anothe code -->
+
+__@Injectable__ : service
+Dependency injection
+__@Controller__ : controller
+__@Post__ : controller
+__@HttpCode__ : controller
+__@Body__ : controller
+__@Schema__ : schema
+__@Prop__

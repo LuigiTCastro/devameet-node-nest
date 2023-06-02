@@ -9,11 +9,11 @@ async function bootstrap() {
 
   app.enableCors(); // Enable the use of Cors.
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: false
+  app.useGlobalPipes( // Configura um middleware de validação global para o aplicativo.
+    new ValidationPipe({ // Usa o ValidationPipe para aplicar validações nos dados recebidos nas requisições HTTP em toda a aplicação.
+      transform: true, // Realiza a transformação dos dados recebidos para seus correspondentes tipos, com base nos decorators fornecidos. 
+      whitelist: true, // Garante que apenas as propriedades com decoratos de validação sejam permitidas nos objetos de entrada.
+      forbidNonWhitelisted: false // Com o whitelist ativo, esse parâmetro controla se uma requisição deve ser proibida (responder com erro HTTP) caso haja propriedades não decoradas. Se definido como false, as propriedades não decoradas são simplesmente removidas, mas a requisição é processada normalmente
     })
   );
 
@@ -21,7 +21,9 @@ async function bootstrap() {
 
   await app.listen(3000);
 }
-bootstrap();
+
+bootstrap(); // Creates the NEST project from the AppModule..
+// And goes up on the 3000 door.
 
 
 // Two new dependencies to install: clas-validator, class-transformer.
