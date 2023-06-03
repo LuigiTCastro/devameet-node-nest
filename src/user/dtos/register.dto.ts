@@ -1,4 +1,4 @@
-import { IsEmail, IsString, MATCHES, Matches, MaxLength, MinLength, minLength } from "class-validator";
+import { IsEmail, IsString, Matches, MaxLength, MinLength } from "class-validator";
 import { UserMessageHelpers } from "../helpers/message.helpers";
 
 // User Domain Layer
