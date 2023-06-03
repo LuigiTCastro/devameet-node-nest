@@ -1,6 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./dtos/login.dto";
+import { RegisterDto } from "src/user/dtos/register.dto";
 
 @Controller('auth')
 export class AuthController {
@@ -14,6 +15,12 @@ export class AuthController {
     // O método login está decorado com @Post('login'), o que significa que esse método será invocado quando uma requisição POST for feita para a rota '/login'.
         
         return this.authService.login(dto);
+    }
+
+    @Post('register')
+    @HttpCode(HttpStatus.OK)
+    register(@Body() dto: RegisterDto) {        
+        return this.authService.register(dto);
     }
 }
 
