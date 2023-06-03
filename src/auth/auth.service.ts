@@ -4,28 +4,47 @@ import { MessagesHelper } from "./helpers/messages.helper";
 import { RegisterDto } from "src/user/dtos/register.dto";
 import { UserService } from "src/user/user.service";
 import { UserMessageHelpers } from "src/user/helpers/message.helpers";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable() // Mark a class as a service provider.
 // Indicates that the class can be injected as a dependency in another class (within module context).
 export class AuthService {
-    constructor(private readonly userService: UserService) {}
+    
+    constructor(
+        private readonly userService: UserService,
+        private readonly jwtService: JwtService
+    ) { }
 
-    private logger = new Logger(AuthService.name)
+    private logger = new Logger(AuthService.name);
 
-    login(dto: LoginDto) {
+    async login(dto: LoginDto) {
         this.logger.debug('login: started.');
 
-        if (dto.login !== 'admin@email.com' || dto.password !== 'admin123') {
+        const user = await this.userService.getUserByLoginPassword(dto.login, dto.password)
+
+        if (user == null) {
             throw new BadRequestException(MessagesHelper.AUTH_LOGIN_OR_PASSWORD_NOT_FOUND)
         }
 
-        return dto;
+        const tokenPayload = { email: user.email, sub: user._id }
+
+        return {
+            name: user.name,
+            email: user.email,
+            token: this.jwtService.sign(tokenPayload, {secret: process.env.USER_JWT_SECRET_KEY})
+        };
     }
 
-    async register(dto: RegisterDto){
+
+    // criar o user
+    // verificar o valor do user
+    // se nao nulo, criar o token
+    // se nao nulo, retornar os dados do user
+
+    async register(dto: RegisterDto) {
         this.logger.debug('register: started.');
 
-        if(await this.userService.existsByEmail(dto.email)) {
+        if (await this.userService.existsByEmail(dto.email)) {
             throw new BadRequestException(UserMessageHelpers.REGISTER_EXIST_EMAIL_ACCOUNT);
         }
 

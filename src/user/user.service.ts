@@ -3,26 +3,41 @@ import { UserDocument, UserModel } from "./schema/user.schema";
 import { Model } from "mongoose";
 import { RegisterDto } from "./dtos/register.dto";
 import { Injectable } from "@nestjs/common";
-import * as CryptoJs from 'crypto-js'
+import * as CryptoJS from 'crypto-js'
 
 @Injectable()
 export class UserService {
     constructor(@InjectModel(UserModel.name) private readonly userModel: Model<UserDocument>) { }
 
     async create(dto: RegisterDto) {
-        dto.password = CryptoJs.AES.encrypt(dto.password, process.env.USER_CYPHER_SECRET_KEY)
+        dto.password = CryptoJS.AES.encrypt(dto.password, process.env.USER_CYPHER_SECRET_KEY).toString();
 
-        const createdUser = new this.userModel(dto)
+        const createdUser = new this.userModel(dto); // userModel diferente?
         await createdUser.save()
     }
 
     async existsByEmail(email: String): Promise<boolean> {
-        const result = await this.userModel.findOne({email});
+        const result = await this.userModel.findOne({ email });
 
         if (result) {
             return true;
         }
 
         return false;
+    }
+
+    async getUserByLoginPassword(email: string, password: string): Promise<UserDocument | null> {
+        const user = await this.userModel.findOne({ email }) as UserDocument;
+
+        if (user) {
+            const bytes = CryptoJS.AES.decrypt(user.password, process.env.USER_CYPHER_SECRET_KEY);
+            const savedPassword = bytes.toString(CryptoJS.enc.Utf8);
+
+            if (password == savedPassword) {
+                return user;
+            }
+        }
+
+        return null;
     }
 }

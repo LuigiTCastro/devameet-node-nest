@@ -63,18 +63,27 @@ Creates the NEST project from the AppModule..
 And goes up on the 3000 door.
 
 
-# DECORATORS
-Way to inject behavior into the class, with economy of code.
+# CLASS-VALIDATOR & DECORATORS
+[Class-Validator]: Is a library that provides a decorators and validators cluster to facility the data validation in classes and objects. It allows to specify declaratives validation rules using decorators in class properties. These rules are automatically applied when receiving data. In short, it automatically validates incoming requests without the need to code the validation.
 
+[Decorators]: Way to inject behavior into the class, with economy of code.
 __@Module__ : module
 File grouping as a microservice.
 Piece of code that works autonomously. <!-- can be imported to be used in anothe code -->
-
 __@Injectable__ : service
 Dependency injection
+__@InjectModel__
 __@Controller__ : controller
-__@Post__ : controller
+__@Post__ : controller (@Put, @Get, @Delete)
 __@HttpCode__ : controller
 __@Body__ : controller
 __@Schema__ : schema
 __@Prop__
+
+__@IsEmpty__
+__@IsNotEmpty__
+__@IsString__
+__@IsEmail__
+__@MinLength__
+__@MaxLength__
+__@Matches__
