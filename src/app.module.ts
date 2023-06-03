@@ -3,6 +3,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/guards/jwt.guards';
 
 @Module({
   imports: [
@@ -12,7 +14,9 @@ import { UserModule } from './user/user.module';
     UserModule
   ],
   controllers: [], // Controladores são responsáveis por tratar as requisições HTTP e retornar as respostas adequadas.
-  providers: [], // Provedores são classes ou objetos responsáveis por fornecer funcionalidades para outros componentes do aplicativo, como serviços, repositórios, etc.
+  providers: [
+    {provide: APP_GUARD, useClass: JwtAuthGuard}
+  ], // Provedores são classes ou objetos responsáveis por fornecer funcionalidades para outros componentes do aplicativo, como serviços, repositórios, etc.
 })
 
 export class AppModule { }

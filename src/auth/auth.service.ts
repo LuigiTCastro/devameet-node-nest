@@ -35,12 +35,6 @@ export class AuthService {
         };
     }
 
-
-    // criar o user
-    // verificar o valor do user
-    // se nao nulo, criar o token
-    // se nao nulo, retornar os dados do user
-
     async register(dto: RegisterDto) {
         this.logger.debug('register: started.');
 

@@ -19,6 +19,13 @@ Command to create new projects:
 Command to start a project in development mode:
     <npm run start:dev>
 
+Command to install libraries from nestjs
+    <npm i @nestjs/library library>
+    <!-- class-validator: validation -->
+    <!-- class-transformer: ... -->
+    <!-- passport: authentication -->
+    <!-- jwt: token -->
+
 
 > PACKAGE.JSON
 Contém informações sobre as dependências do projeto, scripts para execução de tarefas específicas, metadados do projeto e outras configurações relacionadas ao ambiente de desenvolvimento. Também inclui informações sobre a versão do projeto, autor, licença, scripts de teste, entre outros metadados relevantes.
@@ -63,9 +70,10 @@ Creates the NEST project from the AppModule..
 And goes up on the 3000 door.
 
 
-# CLASS-VALIDATOR & DECORATORS
+# CLASS-VALIDATOR
 [Class-Validator]: Is a library that provides a decorators and validators cluster to facility the data validation in classes and objects. It allows to specify declaratives validation rules using decorators in class properties. These rules are automatically applied when receiving data. In short, it automatically validates incoming requests without the need to code the validation.
 
+# DECORATORS
 [Decorators]: Way to inject behavior into the class, with economy of code.
 __@Module__ : module
 File grouping as a microservice.
@@ -87,3 +95,8 @@ __@IsEmail__
 __@MinLength__
 __@MaxLength__
 __@Matches__
+Makes use of Regex.
+
+# GUARDS
+They determine wheter a given request will be handled by the route handler or not, depending on certain conditions.
+Implements the CanActivate interface.
