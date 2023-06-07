@@ -1,6 +1,8 @@
-import { BadRequestException, Controller, Get, Request } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Get, HttpCode, HttpStatus, Put, Request } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { UserMessageHelpers } from "./helpers/message.helpers";
+import { UpdateUserDto } from "./dtos/updateuser.dto";
+import { IsPublic } from "src/auth/decorators/ispublic.decorator";
 
 @Controller('user')
 export class UserController {
@@ -21,7 +23,15 @@ export class UserController {
             avatar: user.avatar,
             id: user._id
         }
-
-        
     }
+
+    @Put()
+    @HttpCode(HttpStatus.OK)
+    async updateUser(@Request() req, @Body() dto: UpdateUserDto) {
+        const { userId } = req?.user; // where does the user come from?
+        await this.userService.updateUser(userId, dto);
+    }
+
 }
+
+

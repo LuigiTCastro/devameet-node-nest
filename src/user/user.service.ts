@@ -4,6 +4,7 @@ import { Model } from "mongoose";
 import { RegisterDto } from "./dtos/register.dto";
 import { Injectable } from "@nestjs/common";
 import * as CryptoJS from 'crypto-js'
+import { UpdateUserDto } from "./dtos/updateuser.dto";
 
 @Injectable()
 export class UserService {
@@ -11,6 +12,7 @@ export class UserService {
 
     async create(dto: RegisterDto) {
         dto.password = CryptoJS.AES.encrypt(dto.password, process.env.USER_CYPHER_SECRET_KEY).toString();
+        // Criptografa a senha atual do usuário usando a chave definida para salvá-la no banco.
 
         const createdUser = new this.userModel(dto);
         await createdUser.save()
@@ -44,4 +46,15 @@ export class UserService {
     async getUserById(id: string) {
         return await this.userModel.findById(id);
     }
+
+    async updateUser(id: string, dto: UpdateUserDto) {
+        return await this.userModel.findByIdAndUpdate(id, dto);
+    }
 }
+
+
+/* 
+CryptoJS.AES.encrypt()
+    It is used to apply AES (Advanced Encryption Standard) encryption to the password.
+    It receives as parameters: the password to be encrypted and the cryptographic key (defined as process.env.USER_CYPHER_SECRET_KEY)
+*/

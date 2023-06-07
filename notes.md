@@ -100,3 +100,10 @@ Makes use of Regex.
 # GUARDS
 They determine wheter a given request will be handled by the route handler or not, depending on certain conditions.
 Implements the CanActivate interface.
+
+`jwt.guards`
+Adiciona um middleware para cada requisição onde vamos validar o token antes de passarmos para o controller.
+O GUARD é utilizado para verificar se o token JWT fornecido nas requisições é válido antes de passá-lo para o controller correspondente.
+
+# STRATEGY
+The Strategy pattern is used to define the user's authentication strategy when identifying, allowing the flexible and dynamic choice of the appropriate authentication method for each situation.
