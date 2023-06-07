@@ -19,12 +19,15 @@ Command to create new projects:
 Command to start a project in development mode:
     <npm run start:dev>
 
-Command to install libraries from nestjs
+Command to install libraries from nestjs:
     <npm i @nestjs/library library>
     <!-- class-validator: validation -->
     <!-- class-transformer: ... -->
     <!-- passport: authentication -->
     <!-- jwt: token -->
+
+Command to create a code structure automatically:
+    <nest g 'structure' 'name'>
 
 
 > PACKAGE.JSON
@@ -107,3 +110,19 @@ O GUARD é utilizado para verificar se o token JWT fornecido nas requisições �
 
 # STRATEGY
 The Strategy pattern is used to define the user's authentication strategy when identifying, allowing the flexible and dynamic choice of the appropriate authentication method for each situation.
+
+
+
+
+
+
+
+
+
+
+
+
+> REGEX:
+ex.: /[0-9A-Fa-f{3,6}]/
+ex.: /[...{...}]/
+ex.: /[...]/

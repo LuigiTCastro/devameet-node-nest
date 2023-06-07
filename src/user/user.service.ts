@@ -8,7 +8,7 @@ import { UpdateUserDto } from "./dtos/updateuser.dto";
 
 @Injectable()
 export class UserService {
-    constructor(@InjectModel(UserModel.name) private readonly userModel: Model<UserDocument>) { }
+    constructor(@InjectModel(UserModel.name) private readonly userModel: Model<UserDocument>) { } // name from 'UserModel.name' is the name of the function.
 
     async create(dto: RegisterDto) {
         dto.password = CryptoJS.AES.encrypt(dto.password, process.env.USER_CYPHER_SECRET_KEY).toString();
