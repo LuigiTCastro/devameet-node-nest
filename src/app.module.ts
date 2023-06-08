@@ -5,13 +5,15 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt.guards';
+import { MeetModule } from './meet/meet.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.DATABASE_URL), 
     AuthModule,
-    UserModule
+    UserModule,
+    MeetModule
   ],
   controllers: [], // Controladores são responsáveis por tratar as requisições HTTP e retornar as respostas adequadas.
   providers: [
