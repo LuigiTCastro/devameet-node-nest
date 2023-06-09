@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Put, Request } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Request } from "@nestjs/common";
 import { MeetService } from "./meet.service";
 import { GetMeetDto } from "./dtos/getmeet.dto";
 import { CreateMeetDto } from "./dtos/createmeet.dto";
@@ -32,11 +32,13 @@ export class MeetController {
 
     }
 
-    @Delete()
-    async deleteMeet() {
-
+    @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async deleteMeet(@Request() req, @Param() params) { // The PARAM decorator works as a Query.
+        const { userId } = req?.user;
+        const { meetId } = params;
+        await this.meetService.deleteMeet(userId, meetId);
     }
-
 }
 
 
