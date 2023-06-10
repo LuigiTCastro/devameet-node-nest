@@ -1,9 +1,9 @@
-import { IsArray, IsNumber, IsString, Matches, Max, Min, ValidateNested } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsString, Matches, Max, Min, ValidateNested, isNotEmpty } from "class-validator";
 import { CreateMeetDto } from "./createmeet.dto";
 import { MeetMessagesHelpers } from "../helpers/messages.helpers";
 import { Type } from "class-transformer";
 
-export class UpdateMeetDto extends CreateMeetDto { // 'Extends' is the way of to INHERIT from a class in the NODEJS.
+export class UpdateMeetDto extends CreateMeetDto { // 'Extends' is a way of to INHERIT from a class in the NODEJS.
 
     @IsArray({ message: MeetMessagesHelpers.UPDATE_OBJECT_NAME_NOT_VALID })
     @Type(() => UpdateMeetObjectsDto)

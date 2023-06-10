@@ -7,7 +7,7 @@ export type MeetDocument = HydratedDocument<MeetModel>;
 @Schema()
 export class MeetModel {
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserModel' })
     user: UserModel;
 
     @Prop({ required: true })

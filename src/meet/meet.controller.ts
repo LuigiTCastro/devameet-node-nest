@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, 
 import { MeetService } from "./meet.service";
 import { GetMeetDto } from "./dtos/getmeet.dto";
 import { CreateMeetDto } from "./dtos/createmeet.dto";
+import { UpdateMeetDto, UpdateMeetObjectsDto } from "./dtos/updatemeet.dto";
 
 @Controller('meet')
 export class MeetController {
@@ -27,9 +28,29 @@ export class MeetController {
         }) as GetMeetDto)
     }
 
-    @Put()
-    async updateMeet() {
+    @Get('objects/:id')
+    async getMeetObjects(@Request() req, @Param() params) {
+        const { userId } = req?.user;
+        const { id } = params;
+        // return await this.meetService.getMeetObjects(userId, meetId)
+        const result = await this.meetService.getMeetObjectsById(userId, id)
 
+        return result.map((m) => ({
+            id: m._id.toString(),
+            meet: m.meet,
+            name: m.name,
+            x: m.x,
+            y: m.y,
+            zindex: m.zindex,
+            orientation: m.orientation,
+        }) as UpdateMeetObjectsDto)
+    }
+
+    @Put(':id')
+    async updateMeet(@Request() req, @Param() params, @Body() dto: UpdateMeetDto) {
+        const { userId } = req?.user;
+        const { id } = params;
+        await this.meetService.updateMeet(userId, id, dto)
     }
 
     @Delete(':id')

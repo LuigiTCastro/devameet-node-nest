@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { MeetDocument, MeetModel } from "./schema/meet.schema";
 import { Model } from "mongoose";
@@ -6,15 +6,18 @@ import { UserService } from "src/user/user.service";
 import { CreateMeetDto } from "./dtos/createmeet.dto";
 import { GetMeetDto } from "./dtos/getmeet.dto";
 import { generateLink } from "./helpers/linkgenerator.helpers";
-import { MeetObjectsDocument } from "./schema/meetobjects.schema";
+import { MeetObjectsDocument, MeetObjectsModel } from "./schema/meetobjects.schema";
 import { UpdateMeetDto } from "./dtos/updatemeet.dto";
+import { MeetMessagesHelpers } from "./helpers/messages.helpers";
 
 @Injectable()
 export class MeetService {
     private logger = new Logger(MeetService.name);
 
-    constructor(@InjectModel(MeetModel.name)
-    private readonly meetModel: Model<MeetDocument>,
+    constructor(
+        @InjectModel(MeetModel.name)
+        private readonly meetModel: Model<MeetDocument>,
+        @InjectModel(MeetObjectsModel.name)
         private readonly meetObjects: Model<MeetObjectsDocument>,
         private readonly userService: UserService
     ) { }
@@ -39,10 +42,10 @@ export class MeetService {
         // return await this.meetModel.find({ user: userId }) as GetMeetDto[];
     }
 
-    async getMeetObjects(userId: string, meetId: string) {
+    async getMeetObjectsById(userId: string, meetId: string) {
         this.logger.debug(`getMeetObjects - ${userId} - ${meetId}`);
         const user = await this.userService.getUserById(userId);
-        const meet = await this.meetModel.findOne({ _id: meetId, user: user })
+        const meet = await this.meetModel.findOne({ user, _id: meetId })
         return await this.meetObjects.find({ meet });
     }
 
@@ -54,7 +57,11 @@ export class MeetService {
     async updateMeet(userId: string, meetId: string, dto: UpdateMeetDto) {
         this.logger.debug(`updateMeet - ${userId} - ${meetId}`)
         const user = await this.userService.getUserById(userId);
-        const meet = await this.meetModel.findOne({ _id: meetId, user: user });
+        const meet = await this.meetModel.findOne({ user, _id: meetId });
+
+        if (!meet) {
+            throw new BadRequestException(MeetMessagesHelpers.UPDATE_OBJECT_NAME_NOT_VALID);
+        }
 
         this.logger.debug('updateMeet - set new values on meet');
         meet.name = dto.name;
@@ -72,9 +79,7 @@ export class MeetService {
                 meet,
                 ...object
             }
+            await this.meetObjects.create(objectsPayload);
         }
-
-        await this.meetObjects.create(objectsPayload);
-
     }
 }
