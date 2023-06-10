@@ -83,3 +83,25 @@ export class MeetService {
         }
     }
 }
+
+
+/*
+('...')
+This element is called of SPREAD OPERATOR. 
+
+ex.: objectsPayload = {
+                        meet,
+                        ...object
+                    }
+In this case, is used to spread the object properties on the new object 'objectsPayload'
+This allows to combine the properties of both objects into a single object.
+
+{
+    "p1Ob1": "",
+    "p2Ob1": "",
+    "p3Ob1": {
+        "p1Ob2": "",
+        "p2Ob2": ""
+    }
+}
+*/

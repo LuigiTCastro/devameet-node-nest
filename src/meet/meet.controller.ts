@@ -16,7 +16,7 @@ export class MeetController {
 
     @Get()
     async getMeet(@Request() req) {
-        const { userId } = req?.user; // DOUBT: Esse user funciona como se pegar o id do usuario logado?
+        const { userId } = req?.user;
         const result = await this.meetService.getMeetsByUser(userId);
         // return result;
 
@@ -65,7 +65,9 @@ export class MeetController {
 
 
 
-/* 
+/*
+How does this code snippet works?
+
 return result?.map((m) => ({ 
 id: m._id.toString(), 
 name: m.name, 
@@ -73,17 +75,30 @@ color: m.color,
 link: m.link, 
 }) as GetMeetDto); 
 
-1) result?.map(): O operador de encadeamento opcional (?.) verifica se result é diferente de null/undefined antes de chamar o método map(). Evita erros caso result não esteja definido.
-2) m: O parâmetro m representa cada elemento do array result enquanto o map() itera sobre eles.
-3) =>: A sintaxe de seta (=>) é usada para definir uma função de retorno de chamada (callback).
-4) ({ ... }): Os parênteses {} envolvem o objeto que está sendo criado como resultado da transformação.
-5) id: m._id.toString(): A propriedade id do objeto criado recebe o valor do _id convertido para string.
-6) name: m.name: A propriedade name do objeto criado recebe o valor da propriedade name do objeto m.
-9) as GetMeetDto: realiza uma conversão de tipo, garantindo que o objeto criado seja do tipo GetMeetDto.
-10) O map() retorna um novo array com os objetos transformados de acordo com as propriedades especificadas.
+    1) result?.map(): O operador de encadeamento opcional (?.) verifica se result é diferente de null/undefined antes de chamar o método map(). Evita erros caso result não esteja definido.
+    2) m: O parâmetro m representa cada elemento do array result enquanto o map() itera sobre eles.
+    3) =>: A sintaxe de seta (=>) é usada para definir uma função de retorno de chamada (callback).
+    4) ({ ... }): Os parênteses {} envolvem o objeto que está sendo criado como resultado da transformação.
+    5) id: m._id.toString(): A propriedade id do objeto criado recebe o valor do _id convertido para string.
+    6) name: m.name: A propriedade name do objeto criado recebe o valor da propriedade name do objeto m.
+    9) as GetMeetDto: realiza uma conversão de tipo, garantindo que o objeto criado seja do tipo GetMeetDto.
+    10) O map() retorna um novo array com os objetos transformados de acordo com as propriedades especificadas.
 
-In summary, this code snippet loops through the 'result' array and creates a new array with objects that have the following properties: id, name, color, link,
-The new array is the GetMeetDto type.
+    In summary, this code snippet loops through the 'result' array and creates a new array with objects that have the following properties: id, name, color, link,
+    The new array is the GetMeetDto type.
 
-The map() method allows to realize a transformation on the array elements before returning it.
+    The map() method allows to realize a transformation on the array elements before returning it.
+*/
+
+/*
+How does this code snippet works?
+
+const { userId } = req?.user;
+
+    The '.user' is a property of the request object that contains authenticated user information.
+    When the user logs in and is authenticated, is generated a token with the user informations, as the ID.
+    The '.user' works as to get the id from user with active token.
+
+    Destructuring Assignment (atribuição por desestruturação):
+    const { userId } = req?.user; is a way of to extract the value of this property and assignt it to the userId variable.
 */
