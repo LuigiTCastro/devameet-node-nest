@@ -6,6 +6,9 @@ import { UserModule } from './user/user.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt.guards';
 import { MeetModule } from './meet/meet.module';
+import { RoomService } from './room/room.service';
+import { RoomController } from './room/room.controller';
+import { RoomModule } from './room/room.module';
 
 @Module({
   imports: [
@@ -13,11 +16,12 @@ import { MeetModule } from './meet/meet.module';
     MongooseModule.forRoot(process.env.DATABASE_URL), 
     AuthModule,
     UserModule,
-    MeetModule
+    MeetModule,
+    RoomModule
   ],
   controllers: [], // Controladores são responsáveis por tratar as requisições HTTP e retornar as respostas adequadas.
   providers: [
-    {provide: APP_GUARD, useClass: JwtAuthGuard}
+    {provide: APP_GUARD, useClass: JwtAuthGuard},
   ], // Provedores são classes ou objetos responsáveis por fornecer funcionalidades para outros componentes do aplicativo, como serviços, repositórios, etc.
 })
 

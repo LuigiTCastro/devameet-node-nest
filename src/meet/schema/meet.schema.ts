@@ -7,7 +7,7 @@ export type MeetDocument = HydratedDocument<MeetModel>;
 @Schema()
 export class MeetModel {
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserModel' })
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserModel' }) // 'ObjectId' is the mongoose type used to wait for ids.
     user: UserModel;
 
     @Prop({ required: true })
