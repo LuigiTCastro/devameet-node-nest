@@ -28,6 +28,9 @@ Command to install libraries from nestjs:
 
 Command to create a code structure automatically:
     <nest g 'structure' 'name'>
+    <!-- nest generate works to generate some code pattern automatically through of the parameters used -->
+    <!-- such as: service, controller, module, class, interface, test... -->
+
 
 
 > PACKAGE.JSON
@@ -122,7 +125,7 @@ The Strategy pattern is used to define the user's authentication strategy when i
 
 
 
-> REGEX:
+> REGEX syntax:
 ex.: /[0-9A-Fa-f{3,6}]/
 ex.: /[...{...}]/
 ex.: /[...]/

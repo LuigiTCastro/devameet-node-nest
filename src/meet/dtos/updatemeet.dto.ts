@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsNumber, IsString, Matches, Max, Min, ValidateNested, isNotEmpty } from "class-validator";
+import { IsArray, IsNumber, IsString, Matches, Max, Min, ValidateNested } from "class-validator";
 import { CreateMeetDto } from "./createmeet.dto";
 import { MeetMessagesHelpers } from "../helpers/messages.helpers";
 import { Type } from "class-transformer";

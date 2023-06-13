@@ -4,7 +4,6 @@ import { MeetDocument, MeetModel } from "./schema/meet.schema";
 import { Model } from "mongoose";
 import { UserService } from "src/user/user.service";
 import { CreateMeetDto } from "./dtos/createmeet.dto";
-import { GetMeetDto } from "./dtos/getmeet.dto";
 import { generateLink } from "./helpers/linkgenerator.helpers";
 import { MeetObjectsDocument, MeetObjectsModel } from "./schema/meetobjects.schema";
 import { UpdateMeetDto } from "./dtos/updatemeet.dto";

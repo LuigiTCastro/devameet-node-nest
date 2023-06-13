@@ -5,5 +5,5 @@ export const MeetMessagesHelpers = {
     UPDATE_XY_NOT_VALID: 'The x and y axes must be between 0 and 8.',
     UPDATE_ZINDEX_NOT_VALID: 'The informed zindex is not valid.',
     UPDATE_ORIENTATION_NOT_VALID: 'The informed orientation is not valid.',
-    UPDATE_MEET_NOT_FOUN: 'The informed meet was not found.'
+    UPDATE_MEET_NOT_FOUND: 'The informed meet was not found.'
 }
