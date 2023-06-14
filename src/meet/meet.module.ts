@@ -8,7 +8,7 @@ import { MeetObjectsModel, MeetObjectsSchema } from "./schema/meetobjects.schema
 
 @Module({
     imports: [UserModule, MongooseModule.forFeature([
-        { name: MeetModel.name, schema: MeetSchema }, // This represents a TABLE or an ARRAY./
+        { name: MeetModel.name, schema: MeetSchema }, // This represents/creates an ARRAY or a TABLE in DB.
         { name: MeetObjectsModel.name, schema: MeetObjectsSchema }
     ])],
     controllers: [MeetController],

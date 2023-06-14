@@ -21,7 +21,7 @@ export class RoomObjectsModel {
     avatar: string;
     
     @Prop({ required: true })
-    clienteId: string;
+    clientId: string;
     
     @Prop({ required: true })
     x: number;
