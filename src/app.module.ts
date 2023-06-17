@@ -6,8 +6,6 @@ import { UserModule } from './user/user.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt.guards';
 import { MeetModule } from './meet/meet.module';
-import { RoomService } from './room/room.service';
-import { RoomController } from './room/room.controller';
 import { RoomModule } from './room/room.module';
 
 @Module({

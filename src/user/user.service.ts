@@ -3,7 +3,7 @@ import { UserDocument, UserModel } from "./schema/user.schema";
 import { Model } from "mongoose";
 import { RegisterDto } from "./dtos/register.dto";
 import { Injectable } from "@nestjs/common";
-import * as CryptoJS from 'crypto-js'
+import * as CryptoJS from 'crypto-js' // DOUBT
 import { UpdateUserDto } from "./dtos/updateuser.dto";
 
 @Injectable()

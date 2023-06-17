@@ -28,8 +28,16 @@ Command to install libraries from nestjs:
 
 Command to create a code structure automatically:
     <nest g 'structure' 'name'>
-    <!-- nest generate works to generate some code pattern automatically through of the parameters used -->
-    <!-- such as: service, controller, module, class, interface, test... -->
+    <!-- 'nest generate' works to generate some code pattern automatically through of the parameters used -->
+    <!-- such as: service, controller, module, class, interface, test, gateway... -->
+
+Command to create a CRUD structure automatically:
+    <nest new crud-project>
+
+Commando to install websocktes e socket.io:
+    <npm i --save @nestjs/websockets>
+    <npm i --save @nestjs/plataform-socket.io>
+    <npm i socket.io>
 
 
 
@@ -114,6 +122,23 @@ O GUARD é utilizado para verificar se o token JWT fornecido nas requisições �
 # STRATEGY
 The Strategy pattern is used to define the user's authentication strategy when identifying, allowing the flexible and dynamic choice of the appropriate authentication method for each situation.
 
+
+
+# WEB SOCKETS
+Its a technology that allows to open an interactive communication session between the user browser n a server.
+Its like creating a direct tunnel between Back and Front for they can communicate with each other all the time (until the connection is cut).
+Lets to send messages to a server and receive `event-driven responses` without querying the server for a response.
+Keeps an opened connection, making it not necessary to issue requests like a conventional API.
+Focuses on the traffic of JSONs or small things, increasing the performance and speed of the connection.
+Also allows the back to send targeted informations.
+
+_In summary: 'sending real-time information between front and back'._
+
+<!-- mozilla documentation: https://developer.mozilla.org/pt-BR/docs/Web/API/WebSockets_API -->
+<!-- Socket.io: https://socket.io/ -->
+
+The ``NEST`` already has an object that works with ``WEBSOCKET``, called of ``GATEWAY``.
+Gateway is a class with the following decorator: [@WebSocketGateway()].
 
 
 
