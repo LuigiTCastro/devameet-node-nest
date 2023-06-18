@@ -4,8 +4,12 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger : ['debug', 'error', 'log', 'warn'] // Adds the log levels to be used in the application.
+    logger : ['log', 'debug', 'error', 'warn'] // Adds the log levels to be used in the application.
   });
+
+  // debug() é usado para mensagens de log específicas para depuração (úteis durante o processo de depuração)"
+  // log() is used for general log messages (application state, important events or details during the execution...).
+  // debug() is used for specifics log messages for debugging (useful during the debugging process).
 
   app.enableCors(); // Enable the use of Cors.
 

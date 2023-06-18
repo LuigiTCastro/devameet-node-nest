@@ -22,7 +22,7 @@ export class RoomService {
         private readonly userService: UserService
     ) { }
 
-    // serviços (getRoom, getMeet, updateRoom, deleteRoom)
+    // services (getRoom, getMeet, updateRoom, deleteRoom)
     async _getMeet(link: string) {
         this.logger.debug(`_getMeet - ${link}`);
         const meet = await this.meetModel.findOne({ link: link })
@@ -92,7 +92,7 @@ export class RoomService {
         }
     }
 
-    async updateUserMute(dto: ToglMuteDto) {
+    async updateUserMuted(dto: ToglMuteDto) {
         this.logger.debug(`updateUserMute - ${dto.link} - ${dto.userId}`);
 
         const user = await this.userService.getUserById(dto.userId);
