@@ -28,17 +28,34 @@ export class RoomGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
   private activeSockets: ActiveSocketsType[] = []; // Creates an empty array of ActiveSocketsType.
   // Also works to inform everyone who is connected.
 
-  afterInit(server: any) {
+
+  afterInit(server: any) { // provides a callback when the server listener starts.
     this.logger.log('Gateway initialized.');
   }
 
-  handleConnection(client: any, ...args: any[]) {
+
+  handleConnection(client: any, ...args: any[]) { // provides a callback when any client connects to on web socket.
     this.logger.debug(`Client: ${client.id} connected`);
   }
 
-  handleDisconnect(client: any) {
+
+  async handleDisconnect(client: any) { // provides a callback when any client disconnects to on web socket.
+    const existingOnSockets = this.activeSockets.find(socket => {
+      socket.id === client.id
+    });
+
+    if(!existingOnSockets) return;
+
+    this.activeSockets = this.activeSockets.filter(socket => {
+      socket.id !== client.id
+    });
+
+    await this.roomService.deleteUserPosition(client.id);
+    client.broadcast.emit(`${existingOnSockets.room}-removes-user`, {socketId: client.id});
+
     this.logger.debug(`Client: ${client.id} disconnected`);
   }
+
 
   @SubscribeMessage('join')
   async handleJoin(client: Socket, payload: JoinRoomDto) {
@@ -65,17 +82,16 @@ export class RoomGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
       // list users
       const users = await this.roomService.listUsersPositionByLink(dto.link)
 
-      // to emit (??)
+      // to emit: works to send everyone that are connecteds on the server, passing the roomId for just who are in the room.
       this.wss.emit(`${link}-updates-users-list`, {
         users
       });
 
-      // broadcast (??)
+      // broadcast (transmissao): sends the datas for all other connected clients, except for our id.
       client.broadcast.emit(`${link}-adds-user`, {
         user: client.id
       });
     }
-    // broadcast: transmissao.
 
     // If the client already exists in the activeSockets array, then when entering the room, just the below message is returned. 
     this.logger.debug(`Socket client: ${client.id} starts to join room ${link}`);

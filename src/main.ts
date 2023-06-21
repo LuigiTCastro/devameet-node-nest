@@ -23,7 +23,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api'); // all path will have the 'api' prefix.
 
-  await app.listen(3000);
+  await app.listen(process.env.SERVER_PORT);
 }
 
 bootstrap(); // Creates the NEST project from the AppModule..

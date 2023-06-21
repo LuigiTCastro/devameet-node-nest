@@ -141,6 +141,16 @@ The ``NEST`` already has an object that works with ``WEBSOCKET``, called of ``GA
 Gateway is a class with the following decorator: [@WebSocketGateway()].
 
 
+A utilização de WebSockets permite estabelecer uma conexão bidirecional persistente entre um cliente e um servidor.
+Diferente do protocolo HTTP tradicional, que é baseado em requisições e respostas, os WebSockets permitem que tanto o cliente quanto o servidor enviem dados um para o outro de forma assíncrona, em tempo real.
+Aplicações interativas, troca de dados em tempo real (chats, notificações, jogos multiplayer).
+
+
+Para identificar de forma individual cada conexão em uma aplicação WebSocket, é comum utilizar o id do cliente (client id) como meio de identificação.
+Cada vez que um cliente se conecta ao servidor WebSocket, ele recebe um id único que o identifica dentro do contexto daquela conexão específica.
+Possivel pegar o client da classe Socket.
+
+
 
 
 
